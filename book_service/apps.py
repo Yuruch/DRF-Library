@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class BookServiseConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'book_servise'
+    name = 'book_service'
