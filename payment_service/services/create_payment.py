@@ -1,7 +1,7 @@
 import os
 import stripe
 from django.urls import reverse
-from payment.models import Payment
+from payment_service.models import Payment
 
 stripe.api_key = os.getenv("STRIPE_TEST_API_KEY")
 

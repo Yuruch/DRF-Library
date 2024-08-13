@@ -1,13 +1,13 @@
 from django.urls import path
 
-from payment.views import (
+from payment_service.views import (
     PaymentListView,
     PaymentDetailView,
     payment_success,
     payment_cancel,
 )
 
-app_name = "payment"
+app_name = "payment_service"
 
 
 urlpatterns = [

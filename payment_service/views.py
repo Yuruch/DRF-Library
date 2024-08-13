@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import generics
 
-from payment.models import Payment
-from payment.serializers import PaymentSerializer
+from payment_service.models import Payment
+from payment_service.serializers import PaymentSerializer
 
 
 class PaymentListView(generics.ListAPIView):
