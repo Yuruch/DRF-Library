@@ -16,7 +16,7 @@
     },
     {
         "model": "user.user",
-        "pk": 3,
+        "pk": 4,
         "fields": {
             "email": "bob@example.com",
             "password": "pbkdf2_sha256$870000$PED7Dxsu3xW86Kq1WWIXJ5$hsiePM/eXd0+uAw/Nblc9Wd7gclie8ZcsWCs4TRoPgc=",
@@ -31,7 +31,7 @@
     },
     {
         "model": "user.user",
-        "pk": 4,
+        "pk": 5,
         "fields": {
             "email": "carol@example.com",
             "password": "pbkdf2_sha256$870000$5o45On1cGHR3fVCgmWcpD5$YihiGrcUsUKOSOP5V+6Pea9W63HpN+LTRKU1PsvNFx0=",
