@@ -16,3 +16,17 @@ class TelegramBot:
         if not self._api_token:
             # todo raise error
             pass
+
+    def _send_message(self, to: int, message: str):
+        params = {
+            "chat_id": to,
+            "text": message
+        }
+        headers = {
+            "Content-Type": "application/json"
+        }
+        request = requests.post(
+            f"https://api.telegram.org/bot{self._api_token}/sendMessage",
+            params=params,
+            headers=headers
+        )
