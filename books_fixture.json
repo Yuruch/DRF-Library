@@ -5,7 +5,7 @@
     "fields": {
       "title": "Python Crash Course",
       "author": "Eric Matthes",
-      "cover": "Hard",
+      "cover": "HARD",
       "inventory": 15,
       "daily_fee": "19.99"
     }
@@ -16,7 +16,7 @@
     "fields": {
       "title": "Head-First Python, 2nd edition",
       "author": "Paul Barry",
-      "cover": "Soft",
+      "cover": "SOFT",
       "inventory": 11,
       "daily_fee": "17.60"
     }
@@ -27,7 +27,7 @@
     "fields": {
       "title": "Invent Your Own Computer Games with Python",
       "author": "Al Sweigart",
-      "cover": "Hard",
+      "cover": "HARD",
       "inventory": 5,
       "daily_fee": "25.99"
     }
@@ -38,7 +38,7 @@
     "fields": {
       "title": "Think Python: How to Think Like a Computer Scientist",
       "author": "Allen B. Downey",
-      "cover": "Hard",
+      "cover": "HARD",
       "inventory": 9,
       "daily_fee": "18.50"
     }
@@ -49,7 +49,7 @@
     "fields": {
       "title": "Effective Computation in Physics: Field Guide to Research with Python",
       "author": "Anthony Scopatz",
-      "cover": "Soft",
+      "cover": "SOFT",
       "inventory": 16,
       "daily_fee": "14.33"
     }
@@ -60,7 +60,7 @@
     "fields": {
       "title": "Learn Python 3 the Hard Way",
       "author": "Zed A. Shaw",
-      "cover": "Hard",
+      "cover": "HARD",
       "inventory": 14,
       "daily_fee": "15.05"
     }
@@ -71,7 +71,7 @@
     "fields": {
       "title": "Python for Kids: A Playful Introduction to Programming",
       "author": "Jason R. Briggs",
-      "cover": "Soft",
+      "cover": "SOFT",
       "inventory": 11,
       "daily_fee": "18.99"
     }
@@ -82,7 +82,7 @@
     "fields": {
       "title": "Teach Your Kids to Code: A Parent-Friendly Guide to Python Programming",
       "author": "Bryson Payne",
-      "cover": "Soft",
+      "cover": "SOFT",
       "inventory": 3,
       "daily_fee": "16.55"
     }
@@ -93,7 +93,7 @@
     "fields": {
       "title": "Python Tricks: A Buffet of Awesome Python Features",
       "author": "Dan Bader",
-      "cover": "Soft",
+      "cover": "SOFT",
       "inventory": 6,
       "daily_fee": "12.45"
     }
@@ -104,7 +104,7 @@
     "fields": {
       "title": "Effective Python: 59 Ways to Write Better Python",
       "author": "Brett Slatkin",
-      "cover": "Hard",
+      "cover": "HARD",
       "inventory": 9,
       "daily_fee": "19.99"
     }
@@ -115,7 +115,7 @@
     "fields": {
       "title": "Python Cookbook",
       "author": "David Beazley & Brian K. Jones ",
-      "cover": "Soft",
+      "cover": "SOFT",
       "inventory": 15,
       "daily_fee": "24.99"
     }

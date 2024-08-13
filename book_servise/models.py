@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Cover(models.TextChoices):
-    HARD = "Hard"
-    SOFT = "Soft"
+    HARD = "HARD"
+    SOFT = "SOFT"
 
 
 class Book(models.Model):
