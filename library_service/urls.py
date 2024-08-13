@@ -22,4 +22,8 @@ urlpatterns = [
     path(
         "api/payments", include("payment_service.urls", namespace="payments")
     ),
+    path(
+        "api/book_service/",
+        include("book_service.urls", namespace="book_service"),
+    ),
 ]

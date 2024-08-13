@@ -15,7 +15,8 @@ class PaymentListView(generics.ListAPIView):
         if user.is_staff:
             return Payment.objects.all()
         else:
-            return Payment.objects.filter(borrowing__user=user)
+            # return Payment.objects.filter(borrowing_id__in=user.borrowings)
+            return Payment.objects.all()
 
 
 class PaymentDetailView(generics.RetrieveAPIView):
@@ -27,7 +28,8 @@ class PaymentDetailView(generics.RetrieveAPIView):
         if user.is_staff:
             return Payment.objects.all()
         else:
-            return Payment.objects.filter(borrowing__user=user)
+            # return Payment.objects.filter(borrowing_id__in=user.borrowings)
+            return Payment.objects.all()
 
 
 def payment_success(request):
