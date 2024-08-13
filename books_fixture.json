@@ -1,0 +1,123 @@
+[
+  {
+    "model": "book_service.book",
+    "pk": 1,
+    "fields": {
+      "title": "Python Crash Course",
+      "author": "Eric Matthes",
+      "cover": "Hard",
+      "inventory": 15,
+      "daily_fee": "19.99"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 2,
+    "fields": {
+      "title": "Head-First Python, 2nd edition",
+      "author": "Paul Barry",
+      "cover": "Soft",
+      "inventory": 11,
+      "daily_fee": "17.60"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 3,
+    "fields": {
+      "title": "Invent Your Own Computer Games with Python",
+      "author": "Al Sweigart",
+      "cover": "Hard",
+      "inventory": 5,
+      "daily_fee": "25.99"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 4,
+    "fields": {
+      "title": "Think Python: How to Think Like a Computer Scientist",
+      "author": "Allen B. Downey",
+      "cover": "Hard",
+      "inventory": 9,
+      "daily_fee": "18.50"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 5,
+    "fields": {
+      "title": "Effective Computation in Physics: Field Guide to Research with Python",
+      "author": "Anthony Scopatz",
+      "cover": "Soft",
+      "inventory": 16,
+      "daily_fee": "14.33"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 6,
+    "fields": {
+      "title": "Learn Python 3 the Hard Way",
+      "author": "Zed A. Shaw",
+      "cover": "Hard",
+      "inventory": 14,
+      "daily_fee": "15.05"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 7,
+    "fields": {
+      "title": "Python for Kids: A Playful Introduction to Programming",
+      "author": "Jason R. Briggs",
+      "cover": "Soft",
+      "inventory": 11,
+      "daily_fee": "18.99"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 8,
+    "fields": {
+      "title": "Teach Your Kids to Code: A Parent-Friendly Guide to Python Programming",
+      "author": "Bryson Payne",
+      "cover": "Soft",
+      "inventory": 3,
+      "daily_fee": "16.55"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 9,
+    "fields": {
+      "title": "Python Tricks: A Buffet of Awesome Python Features",
+      "author": "Dan Bader",
+      "cover": "Soft",
+      "inventory": 6,
+      "daily_fee": "12.45"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 10,
+    "fields": {
+      "title": "Effective Python: 59 Ways to Write Better Python",
+      "author": "Brett Slatkin",
+      "cover": "Hard",
+      "inventory": 9,
+      "daily_fee": "19.99"
+    }
+  },
+    {
+    "model": "book_service.book",
+    "pk": 11,
+    "fields": {
+      "title": "Python Cookbook",
+      "author": "David Beazley & Brian K. Jones ",
+      "cover": "Soft",
+      "inventory": 15,
+      "daily_fee": "24.99"
+    }
+  }
+]
