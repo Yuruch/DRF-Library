@@ -7,7 +7,8 @@
       "author": "Eric Matthes",
       "cover": "HARD",
       "inventory": 15,
-      "daily_fee": "19.99"
+      "daily_fee": "19.99",
+      "image": null
     }
   },
   {
@@ -18,7 +19,8 @@
       "author": "Paul Barry",
       "cover": "SOFT",
       "inventory": 11,
-      "daily_fee": "17.60"
+      "daily_fee": "17.60",
+      "image": null
     }
   },
   {
@@ -29,7 +31,8 @@
       "author": "Al Sweigart",
       "cover": "HARD",
       "inventory": 5,
-      "daily_fee": "25.99"
+      "daily_fee": "25.99",
+      "image": null
     }
   },
   {
@@ -40,7 +43,8 @@
       "author": "Allen B. Downey",
       "cover": "HARD",
       "inventory": 9,
-      "daily_fee": "18.50"
+      "daily_fee": "18.50",
+      "image": null
     }
   },
   {
@@ -51,7 +55,8 @@
       "author": "Anthony Scopatz",
       "cover": "SOFT",
       "inventory": 16,
-      "daily_fee": "14.33"
+      "daily_fee": "14.33",
+      "image": null
     }
   },
   {
@@ -62,7 +67,8 @@
       "author": "Zed A. Shaw",
       "cover": "HARD",
       "inventory": 14,
-      "daily_fee": "15.05"
+      "daily_fee": "15.05",
+      "image": null
     }
   },
   {
@@ -73,7 +79,8 @@
       "author": "Jason R. Briggs",
       "cover": "SOFT",
       "inventory": 11,
-      "daily_fee": "18.99"
+      "daily_fee": "18.99",
+      "image": null
     }
   },
   {
@@ -84,7 +91,8 @@
       "author": "Bryson Payne",
       "cover": "SOFT",
       "inventory": 3,
-      "daily_fee": "16.55"
+      "daily_fee": "16.55",
+      "image": null
     }
   },
   {
@@ -95,7 +103,8 @@
       "author": "Dan Bader",
       "cover": "SOFT",
       "inventory": 6,
-      "daily_fee": "12.45"
+      "daily_fee": "12.45",
+      "image": null
     }
   },
   {
@@ -106,7 +115,8 @@
       "author": "Brett Slatkin",
       "cover": "HARD",
       "inventory": 9,
-      "daily_fee": "19.99"
+      "daily_fee": "19.99",
+      "image": null
     }
   },
     {
@@ -117,7 +127,8 @@
       "author": "David Beazley & Brian K. Jones ",
       "cover": "SOFT",
       "inventory": 15,
-      "daily_fee": "24.99"
+      "daily_fee": "24.99",
+      "image": null
     }
   }
 ]
