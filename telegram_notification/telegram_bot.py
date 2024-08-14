@@ -1,9 +1,10 @@
 import os
-import requests
-
-from dotenv import load_dotenv
 import logging
 
+
+from dotenv import load_dotenv
+import requests
+from borrowings_service.models import Borrowing
 
 logger = logging.getLogger(__name__)
 load_dotenv()
@@ -24,19 +25,19 @@ class TelegramBot:
         if request.status_code != 200:
             logging.warning(f"Message is not send: {request.content}")
 
-    def borrow_administration_notification(self, borrow: "Borrow"):
+    def borrow_administration_notification(self, borrowing: Borrowing):
         """send notification to administration about new and overdue borrow"""
         message = (
-            f"Borrow date: {borrow.borrow_date}\n"
-            f"Expected return date: {borrow.expected_return_date}\n"
-            f"Book: {borrow.book}\n"
-            f"User: {borrow.user}"
+            f"Borrow date: {borrowing.borrow_date}\n"
+            f"Expected return date: {borrowing.expected_return_date}\n"
+            f"Book: {borrowing.book}\n"
+            f"User: {borrowing.user}"
         )
         self._send_message(self._chat_id, message)
 
-    def multiple_borrow_administration_notification(self, borrows: list["Borrow"]):
-        for borrow in borrows:
-            self.borrow_administration_notification(borrow)
+    def multiple_borrow_administration_notification(self, borrowing_list: list[Borrowing]):
+        for borrowing in borrowing_list:
+            self.borrow_administration_notification(borrowing)
 
     def successful_payment_administration_notification(self, payment: "Payment"):
         """send notification to administration about succesful payment"""
