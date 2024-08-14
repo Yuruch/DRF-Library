@@ -25,7 +25,7 @@
     "model": "user.user",
     "pk": 1,
     "fields": {
-      "email": "alice@example.com",
+      "email": "qweqwe@example.com",
       "password": "pbkdf2_sha256$870000$qO9Xuysc4iTel5QkdcKx4K$4FcihOJh12uhkwQgdwF0IDPw4LyzphqZCaW+/LpsYek=",
       "first_name": "Alice",
       "last_name": "Johnson",
@@ -40,7 +40,7 @@
     "model": "user.user",
     "pk": 2,
     "fields": {
-      "email": "bob@example.com",
+      "email": "bob@qqqw.com",
       "password": "pbkdf2_sha256$870000$PED7Dxsu3xW86Kq1WWIXJ5$hsiePM/eXd0+uAw/Nblc9Wd7gclie8ZcsWCs4TRoPgc=",
       "first_name": "Bob",
       "last_name": "Smith",
