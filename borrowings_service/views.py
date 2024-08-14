@@ -12,6 +12,7 @@ from borrowings_service.serializers import (
     BorrowingCreateSerializer,
     BorrowingReturnSerializer,
 )
+from payment_service.services.create_payment import create_stripe_session
 
 
 class BorrowingViewSet(viewsets.ModelViewSet):
@@ -52,9 +53,20 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         book.inventory -= 1
         book.save()
 
-        serializer.save(user=self.request.user)
+        borrowing = serializer.save(user=self.request.user)
+        payment = create_stripe_session(borrowing, self.request)
+        self.custom_response = Response(
+            {"session_url": payment.session_url},
+            status=status.HTTP_201_CREATED,
+        )
 
-    @action(detail=True, methods=["post"], url_path="return")
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        if hasattr(self, "custom_response"):
+            return self.custom_response
+        return response
+
+    @action(detail=True, methods=["get"], url_path="return")
     def return_borrowing(self, request, pk=None):
         borrowing = self.get_object()
 
@@ -64,8 +76,10 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         if borrowing.actual_return_date:
             return Response(
                 {"detail": "This borrowing has already been returned."},
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
+
+
 
         borrowing.actual_return_date = datetime.now().date()
         serializer = self.get_serializer(borrowing, data=request.data)
