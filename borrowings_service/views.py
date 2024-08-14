@@ -52,6 +52,11 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         if book.inventory <= 0:
             raise ValidationError("The selected book is not available.")
 
+        if self.request.user.borrowing_set.filter(
+            payments__status=Payment.Status.PENDING
+        ).exists():
+            raise PermissionDenied("You have to pay for all the borrowings!")
+
         book.inventory -= 1
         book.save()
 
@@ -99,6 +104,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
                         type=Payment.Type.FINE
                     ).session_url,
                 },
+                status=status.HTTP_200_OK,
             )
 
         borrowing.actual_return_date = datetime.now().date()

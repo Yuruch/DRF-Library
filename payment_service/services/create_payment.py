@@ -17,10 +17,10 @@ def create_stripe_session(
 ) -> Payment:
     if fine:
         total_price = fine
-        type = Payment.Type.FINE
+        payment_type = Payment.Type.FINE
     else:
         total_price = borrowing.calculate_total_price
-        type = Payment.Type.PAYMENT
+        payment_type = Payment.Type.PAYMENT
     session = stripe.checkout.Session.create(
         line_items=[
             {
@@ -45,7 +45,7 @@ def create_stripe_session(
     )
     payment = Payment.objects.create(
         status=Payment.Status.PENDING,
-        type=type,
+        type=payment_type,
         borrowing=borrowing,
         session_url=session.url,
         session_id=session.id,
