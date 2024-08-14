@@ -1,4 +1,5 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, pagination
+from rest_framework.response import Response
 
 from book_service.models import Book
 from book_service.permissions import IsAdminOrReadOnly
@@ -25,3 +26,14 @@ class BookViewSet(viewsets.ModelViewSet):
 
         return queryset.distinct()
 
+
+class CustomPagination(pagination.PageNumberPagination):
+    def get_paginated_response(self, data):
+        return Response({
+            'links': {
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link()
+            },
+            'count': self.page.paginator.count,
+            'results': data
+        })
