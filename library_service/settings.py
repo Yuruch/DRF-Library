@@ -20,9 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-!b1w3@xe2m)o!mb&ek(ji-zd@*yt5b4wumy$&!oq&gj*^!u2=9"
-)
+SECRET_KEY = "django-insecure-!b1w3@xe2m)o!mb&ek(ji-zd@*yt5b4wumy$&!oq&gj*^!u2=9"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework.authtoken",
+    "drf_spectacular",
     "user",
     "payment_service",
     "book_service",
@@ -62,7 +61,7 @@ ROOT_URLCONF = "library_service.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -141,5 +140,18 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
-    "AUTH_HEADER_TYPES": ("Authorize",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZE",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "DRF Library Service API",
+    "DESCRIPTION": "Borrow books and pay for the borrowings",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "defaultModelRendering": "model",
+        "defaultModelsExpandDepth": 2,
+        "defaultModelExpandDepth": 2,
+    },
 }
