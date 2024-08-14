@@ -1,20 +1,33 @@
 import os
 import stripe
+from django.http import HttpRequest
 from django.urls import reverse_lazy
+
+from borrowings_service.models import Borrowing
 from payment_service.models import Payment
 
 stripe.api_key = os.getenv("STRIPE_TEST_API_KEY")
 
 
-def create_stripe_session(borrowing, request):
-    total_price = borrowing.calculate_total_price
+def create_stripe_session(
+    request: HttpRequest,
+    name: str,
+    borrowing: Borrowing = None,
+    fine: int = None,
+) -> Payment:
+    if fine:
+        total_price = fine
+        type = Payment.Type.FINE
+    else:
+        total_price = borrowing.calculate_total_price
+        type = Payment.Type.PAYMENT
     session = stripe.checkout.Session.create(
         line_items=[
             {
                 "price_data": {
                     "currency": "usd",
                     "product_data": {
-                        "name": "Library Book Borrowing",
+                        "name": name,
                     },
                     "unit_amount": int(total_price * 100),
                 },
@@ -30,10 +43,9 @@ def create_stripe_session(borrowing, request):
             reverse_lazy("payment_service:payment-cancel")
         ),
     )
-
     payment = Payment.objects.create(
         status=Payment.Status.PENDING,
-        type=Payment.Type.PAYMENT,
+        type=type,
         borrowing=borrowing,
         session_url=session.url,
         session_id=session.id,
