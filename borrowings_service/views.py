@@ -26,7 +26,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         return BorrowingReadSerializer
 
     def get_queryset(self):
-        queryset = Borrowing.objects.all()
+        queryset = self.queryset
 
         if not self.request.user.is_staff:
             queryset = queryset.filter(user=self.request.user)
@@ -72,4 +72,4 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         borrowing.book.inventory += 1
         borrowing.book.save()
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)

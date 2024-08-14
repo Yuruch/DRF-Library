@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework import serializers
 
 from borrowings_service.models import Borrowing
@@ -28,6 +30,8 @@ class BorrowingCreateSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, attrs):
+        if attrs["expected_return_date"] <= datetime.now().date():
+            raise serializers.ValidationError("The expected return date must be in the future.")
         if attrs["book"].inventory <= 0:
             raise serializers.ValidationError("The selected book is not available.")
         return attrs
@@ -37,8 +41,3 @@ class BorrowingReturnSerializer(serializers.ModelSerializer):
     class Meta:
         model = Borrowing
         fields = ("actual_return_date",)
-
-    def validate_actual_return_date(self, value):
-        if value and value < self.instance.borrow_date:
-            raise serializers.ValidationError("Return date cannot be before borrow date.")
-        return value
