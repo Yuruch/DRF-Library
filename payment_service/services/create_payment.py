@@ -1,13 +1,13 @@
 import os
 import stripe
-from django.urls import reverse
+from django.urls import reverse_lazy
 from payment_service.models import Payment
 
 stripe.api_key = os.getenv("STRIPE_TEST_API_KEY")
 
 
 def create_stripe_session(borrowing, request):
-    total_price = borrowing.calculate_total_price()
+    total_price = borrowing.calculate_total_price
     session = stripe.checkout.Session.create(
         line_items=[
             {
@@ -22,9 +22,13 @@ def create_stripe_session(borrowing, request):
             }
         ],
         mode="payment",
-        success_url=request.build_absolute_uri(reverse("payment-success"))
+        success_url=request.build_absolute_uri(
+            reverse_lazy("payment_service:payment-success")
+        )
         + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=request.build_absolute_uri(reverse("payment-cancel")),
+        cancel_url=request.build_absolute_uri(
+            reverse_lazy("payment_service:payment-cancel")
+        ),
     )
 
     payment = Payment.objects.create(

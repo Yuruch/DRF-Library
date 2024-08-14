@@ -79,8 +79,6 @@ class BorrowingViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-
-
         borrowing.actual_return_date = datetime.now().date()
         serializer = self.get_serializer(borrowing, data=request.data)
         serializer.is_valid(raise_exception=True)

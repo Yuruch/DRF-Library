@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-!b1w3@xe2m)o!mb&ek(ji-zd@*yt5b4wumy$&!oq&gj*^!u2=9"
+SECRET_KEY = (
+    "django-insecure-!b1w3@xe2m)o!mb&ek(ji-zd@*yt5b4wumy$&!oq&gj*^!u2=9"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     "user",
     "payment_service",
     "book_service",
+    "borrowings_service",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +62,7 @@ ROOT_URLCONF = "library_service.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -138,5 +141,5 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
-    # "AUTH_HEADER_TYPES": ("Authorize",),
+    "AUTH_HEADER_TYPES": ("Authorize",),
 }
