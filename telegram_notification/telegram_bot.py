@@ -35,7 +35,9 @@ class TelegramBot:
         )
         self._send_message(self._chat_id, message)
 
-    def multiple_borrow_administration_notification(self, borrowing_list: list[Borrowing]):
+    def multiple_borrow_administration_notification(
+        self, borrowing_list: list[Borrowing]
+    ):
         for borrowing in borrowing_list:
             self.borrow_administration_notification(borrowing)
 
