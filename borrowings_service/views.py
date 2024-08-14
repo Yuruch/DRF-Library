@@ -81,7 +81,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
             return self.custom_response
         return response
 
-    @action(detail=True, methods=["get"], url_path="return")
+    @action(detail=True, methods=["post"], url_path="return")
     def return_borrowing(self, request, pk=None):
         borrowing = self.get_object()
         expected_date = borrowing.expected_return_date
@@ -116,12 +116,14 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         borrowing.book.save()
         actual_date = borrowing.actual_return_date
 
-        if actual_date > expected_date:
-            fine = (
-                (actual_date - actual_date).days
-                * borrowing.book.daily_fee
-                * self.FINE_MULTIPLIER
-            )
+        # if actual_date > expected_date:
+        if 1:
+            # fine = (
+            #     (actual_date - actual_date).days
+            #     * borrowing.book.daily_fee
+            #     * self.FINE_MULTIPLIER
+            # )
+            fine = 100
             payment = create_stripe_session(
                 fine=fine,
                 request=self.request,
