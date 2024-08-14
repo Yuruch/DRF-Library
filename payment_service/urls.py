@@ -11,7 +11,7 @@ app_name = "payment_service"
 
 
 urlpatterns = [
-    path("/", PaymentListView.as_view(), name="payment-list"),
+    path("", PaymentListView.as_view(), name="payment-list"),
     path(
         "<int:pk>/",
         PaymentDetailView.as_view(),
