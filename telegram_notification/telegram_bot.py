@@ -59,3 +59,6 @@ class TelegramBot:
         )
         if response.status_code != 200:
             logging.warning(f"Webhook wasn't set: {response.content}")
+
+    def send_connection_confirm_message_to_user(self, to: int):
+        self._send_message(to, "Successful connected")
