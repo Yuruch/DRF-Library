@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, PermissionDenied
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -57,6 +57,9 @@ class BorrowingViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=["post"], url_path="return")
     def return_borrowing(self, request, pk=None):
         borrowing = self.get_object()
+
+        if borrowing.user != request.user:
+            raise PermissionDenied("You are not allowed to return this book.")
 
         if borrowing.actual_return_date:
             return Response(
