@@ -110,14 +110,12 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         borrowing.book.save()
         actual_date = borrowing.actual_return_date
 
-        # if actual_date > expected_date:
-        if 1:
-            # fine = (
-            #     (actual_date - actual_date).days
-            #     * borrowing.book.daily_fee
-            #     * self.FINE_MULTIPLIER
-            # )
-            fine = 100
+        if actual_date > expected_date:
+            fine = (
+                (actual_date - actual_date).days
+                * borrowing.book.daily_fee
+                * self.FINE_MULTIPLIER
+            )
             payment = create_stripe_session(
                 fine=fine,
                 request=self.request,
