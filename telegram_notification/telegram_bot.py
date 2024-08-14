@@ -58,4 +58,4 @@ class TelegramBot:
             params={"url": webhook_url, "drop_pending_updates": True},
         )
         if response.status_code != 200:
-            logging.warning(f"Webhook isn't setted: {response.content}")
+            logging.warning(f"Webhook wasn't set: {response.content}")
