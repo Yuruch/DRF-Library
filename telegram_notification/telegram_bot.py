@@ -1,10 +1,10 @@
 import os
 import logging
 
-
 from dotenv import load_dotenv
 import requests
 from borrowings_service.models import Borrowing
+
 
 logger = logging.getLogger(__name__)
 load_dotenv()
@@ -50,3 +50,12 @@ class TelegramBot:
             f"The amount: {payment.money_to_pay}$"
         )
         self._send_message(self._chat_id, message)
+
+    def set_webhook(self):
+        webhook_url = f"{os.environ['SERVER_IP']}api/user/connect_telegram/{os.environ['TELEGRAM_BOT_KEY']}"
+        response = requests.post(
+            f"{self.base_url}/setWebhook",
+            params={"url": webhook_url, "drop_pending_updates": True},
+        )
+        if response.status_code != 200:
+            logging.warning(f"Webhook isn't setted: {response.content}")
