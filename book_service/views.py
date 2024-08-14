@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser
@@ -5,7 +6,12 @@ from rest_framework.response import Response
 
 from book_service.models import Book
 from book_service.permissions import IsAdminOrReadOnly
-from book_service.serializers import BookSerializer, BookImageSerializer, BookListSerializer, BookDetailSerializer
+from book_service.serializers import (
+    BookSerializer,
+    BookImageSerializer,
+    BookListSerializer,
+    BookDetailSerializer
+)
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -44,3 +50,28 @@ class BookViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="title",
+                type=str,
+                location=OpenApiParameter.QUERY,
+                description="Filter books by title (ex. ?title=Python Cookbook)",
+            ),
+            OpenApiParameter(
+                name="author",
+                type=str,
+                location=OpenApiParameter.QUERY,
+                description="Filter books by author (ex. ?author=David Beazley & Brian K. Jones)",
+            ),
+            OpenApiParameter(
+                name="cover",
+                type=str,
+                location=OpenApiParameter.QUERY,
+                description="Filter books by cover type (ex. ?cover=SOFT)",
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
