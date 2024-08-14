@@ -8,7 +8,7 @@
       "cover": "HARD",
       "inventory": 15,
       "daily_fee": "19.99",
-      "image": null
+      "image": "book_cover_for_json/1.jpg"
     }
   },
   {
@@ -20,7 +20,7 @@
       "cover": "SOFT",
       "inventory": 11,
       "daily_fee": "17.60",
-      "image": null
+      "image": "book_cover_for_json/2.jpg"
     }
   },
   {
@@ -32,7 +32,7 @@
       "cover": "HARD",
       "inventory": 5,
       "daily_fee": "25.99",
-      "image": null
+      "image": "book_cover_for_json/3.jpg"
     }
   },
   {
@@ -44,7 +44,7 @@
       "cover": "HARD",
       "inventory": 9,
       "daily_fee": "18.50",
-      "image": null
+      "image": "book_cover_for_json/4.jpg"
     }
   },
   {
@@ -56,7 +56,7 @@
       "cover": "SOFT",
       "inventory": 16,
       "daily_fee": "14.33",
-      "image": null
+      "image": "book_cover_for_json/5.jpg"
     }
   },
   {
@@ -68,7 +68,7 @@
       "cover": "HARD",
       "inventory": 14,
       "daily_fee": "15.05",
-      "image": null
+      "image": "book_cover_for_json/6.jpg"
     }
   },
   {
@@ -80,7 +80,7 @@
       "cover": "SOFT",
       "inventory": 11,
       "daily_fee": "18.99",
-      "image": null
+      "image": "book_cover_for_json/7.jpg"
     }
   },
   {
@@ -92,7 +92,7 @@
       "cover": "SOFT",
       "inventory": 3,
       "daily_fee": "16.55",
-      "image": null
+      "image": "book_cover_for_json/8.jpg"
     }
   },
   {
@@ -104,7 +104,7 @@
       "cover": "SOFT",
       "inventory": 6,
       "daily_fee": "12.45",
-      "image": null
+      "image": "book_cover_for_json/9.jpg"
     }
   },
   {
@@ -116,7 +116,7 @@
       "cover": "HARD",
       "inventory": 9,
       "daily_fee": "19.99",
-      "image": null
+      "image": "book_cover_for_json/10.jpg"
     }
   },
     {
@@ -128,7 +128,7 @@
       "cover": "SOFT",
       "inventory": 15,
       "daily_fee": "24.99",
-      "image": null
+      "image": "book_cover_for_json/11.jpg"
     }
   }
 ]
