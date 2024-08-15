@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from django.contrib.auth import get_user_model
 
-User = get_user_model()
+USER = get_user_model()
 
 
 class RegistrationTests(APITestCase):
@@ -19,8 +19,8 @@ class RegistrationTests(APITestCase):
         }
         response = self.client.post(self.register_url, new_user_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(User.objects.count(), 1)
-        self.assertEqual(User.objects.get(email=new_user_data["email"]).email, new_user_data["email"])
+        self.assertEqual(USER.objects.count(), 1)
+        self.assertEqual(USER.objects.get(email=new_user_data["email"]).email, new_user_data["email"])
 
 
 class UserTests(APITestCase):
@@ -34,7 +34,7 @@ class UserTests(APITestCase):
             "first_name": "Test",
             "last_name": "User"
         }
-        self.user = User.objects.create_user(**self.user_data)
+        self.user = USER.objects.create_user(**self.user_data)
         self.client.force_authenticate(user=self.user)
 
     def test_user_login(self):
