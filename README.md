@@ -20,18 +20,19 @@ API service for library management written on DRF
 
 Install PostgresSQL and create db  
 
+```bash
 git clone https://github.com/Yuruch/DRF-Library   
 python -m venv venv  
 source venv/bin/activate  
 pip install -r requirements.txt  
+```
 
-set POSTGRES_PASSWORD=<your_password>  
-set POSTGRES_USER=<your_user>   
-set POSTGRES_DB=<your_db>  
-set POSTGRES_HOST=<your_db_host_name>  
-set STRIPE_TEST_API_KEY=<your_stripe_test_api_key>  
-python manage.py migrate   
-python manage.py runserver  
+
+```bash
+python manage.py migrate
+python manage.py runserver
+```
+
 
 
 # Run with docker  
