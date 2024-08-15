@@ -1,7 +1,7 @@
 import os
 import stripe
 from django.http import HttpRequest
-from django.urls import reverse_lazy
+from django.urls import reverse
 
 from borrowings_service.models import Borrowing
 from payment_service.models import Payment
@@ -36,11 +36,11 @@ def create_stripe_session(
         ],
         mode="payment",
         success_url=request.build_absolute_uri(
-            reverse_lazy("payment_service:payment-success")
+            reverse("payment_service:payment-success")
         )
         + "?session_id={CHECKOUT_SESSION_ID}",
         cancel_url=request.build_absolute_uri(
-            reverse_lazy("payment_service:payment-cancel")
+            reverse("payment_service:payment-cancel")
         ),
     )
     payment = Payment.objects.create(
