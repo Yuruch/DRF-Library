@@ -1,15 +1,15 @@
+from datetime import date, timedelta
 from decimal import Decimal
 from unittest.mock import patch, Mock
 
-import stripe
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
-from payment_service.models import Payment
-from borrowings_service.models import Borrowing
+
 from book_service.models import Book
-from django.contrib.auth import get_user_model
-from datetime import date, timedelta
+from borrowings_service.models import Borrowing
+from payment_service.models import Payment
 
 
 class PaymentServiceTests(APITestCase):
