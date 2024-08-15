@@ -6,6 +6,7 @@ from drf_spectacular.utils import (
 )
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from payment_service.models import Payment
@@ -16,6 +17,7 @@ class PaymentListView(generics.ListAPIView):
     serializer_class = PaymentSerializer
     search_fields = ("borrowing__book__title",)
     ordering_fields = ("type", "money_to_pay")
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         user = self.request.user
