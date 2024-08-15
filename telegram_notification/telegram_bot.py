@@ -52,7 +52,7 @@ class TelegramBot:
         self._send_message(self._chat_id, message)
 
     def set_webhook(self, server_url=os.environ["SERVER_URL"]):
-        webhook_url = f"{server_url}/api/telegram/connect_telegram/{self._api_token}"
+        webhook_url = f"{server_url}/api/telegram/reviece_telegram_messages/"
         response = requests.post(
             f"{self.base_url}/setWebhook",
             params={"url": webhook_url, "drop_pending_updates": True},
