@@ -28,22 +28,33 @@ pip install -r requirements.txt
 ```
 
 
-```bash
-python manage.py migrate
-python manage.py runserver
-```
 
+# Environment variables
+
+This project is fully relying on environment variables, so you have to create .env file
+
+You can find .env.example in project root
 
 
 # Run with docker  
 
-docker compose build  
+```bash
 docker compose up  
+```
 
+# Run locally
+
+```bash
+python manage.py migrate
+python manage.py runserver
+```
+Use the `python manage.py loaddata fixtures.json` 
+
+command to load data from the fixtures.
 
 # Getting access 
 
-create user via /api/user/register/    
-login via /api/user/token/  
+**Create user via** /api/user/register/    
+**Login via** /api/user/token/  
 
-Use the `python manage.py loaddata file_name.json` command to load data from the fixtures.
+
