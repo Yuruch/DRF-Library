@@ -14,6 +14,14 @@ def check_overdue_borrowings():
         actual_return_date__isnull=True
     )
 
+    overdue_borrowings_with_telegram_id = overdue_borrowings.filter(
+        user__telegram_id__isnull=False
+    )
+
+    bot = TelegramBot()
+
     if overdue_borrowings.exists():
-        bot = TelegramBot()
         bot.multiple_borrow_administration_notification(overdue_borrowings)
+
+    for borrowing in overdue_borrowings_with_telegram_id:
+        bot.borrow_user_notification(borrowing, borrowing.user.telegram_id)
