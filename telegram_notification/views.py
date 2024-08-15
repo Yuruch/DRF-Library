@@ -14,7 +14,7 @@ load_dotenv()
 SECRET_PHRASE = os.environ["SECRET_PHRASE"]
 
 
-class ConnectTelegramView(views.APIView):
+class RecieveConfirmationFromTelegram(views.APIView):
     permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):

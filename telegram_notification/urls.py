@@ -1,11 +1,14 @@
 from django.urls import path
 
-from telegram_notification.views import ConnectTelegramView, ObtainTelegramConnectionURL
+from telegram_notification.views import (
+    RecieveConfirmationFromTelegram,
+    ObtainTelegramConnectionURL,
+)
 
 urlpatterns = [
     path(
         "reviece_telegram_messages/",
-        ConnectTelegramView.as_view(),
+        RecieveConfirmationFromTelegram.as_view(),
         name="recieve-messages",
     ),
     path(
