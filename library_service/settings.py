@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "user",
     "book_service",
     "borrowings_service",
+    "telegram_notification",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -170,3 +172,10 @@ SPECTACULAR_SETTINGS = {
 }
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_TIMEZONE = "Europe/Kyiv"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
