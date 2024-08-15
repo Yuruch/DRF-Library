@@ -2,11 +2,16 @@ import os
 import hashlib
 
 from django.contrib.auth import get_user_model
-from rest_framework import views, status
+from drf_spectacular.utils import (
+    extend_schema,
+)
+from rest_framework import views, status, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from telegram_notification.telegram_bot import TelegramBot
 from dotenv import load_dotenv
+
+from telegram_notification.telegram_bot import TelegramBot
+from telegram_notification.serializer import TelegramUrlSerializer
 
 
 load_dotenv()
@@ -17,7 +22,9 @@ SECRET_PHRASE = os.environ["SECRET_PHRASE"]
 class RecieveConfirmationFromTelegram(views.APIView):
     permission_classes = (AllowAny,)
 
+    @extend_schema(exclude=True)
     def post(self, request, *args, **kwargs):
+        """Used for receiving confirmation from Telegram API"""
         if not request.data.get("message").get("text").startswith("/start"):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -56,16 +63,16 @@ class RecieveConfirmationFromTelegram(views.APIView):
             )
 
 
-class ObtainTelegramConnectionURL(views.APIView):
+class ObtainTelegramConnectionURL(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = TelegramUrlSerializer
 
-    def get(self, request, *args, **kwargs):
+    def retrieve(self, request, *args, **kwargs):
+        """Obtain the personal URL to connect Telegram"""
         user_id = request.user.id
 
         signature = hashlib.sha256(f"{user_id}{SECRET_PHRASE}".encode()).hexdigest()[
             16:
         ]
         connect_url = f"{os.environ['BOT_URL']}?start={user_id}_{signature}"
-        return Response(
-            {"your url to connect telegram": connect_url}, status=status.HTTP_200_OK
-        )
+        return Response({"url": connect_url}, status=status.HTTP_200_OK)
