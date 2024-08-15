@@ -24,5 +24,8 @@ class Book(models.Model):
     daily_fee = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(null=True, upload_to=book_image_file_path)
 
+    class Meta:
+        unique_together = (("title", "author"),)
+
     def __str__(self):
         return self.title
