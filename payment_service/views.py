@@ -46,7 +46,7 @@ def payment_success(request):
                 payment.save()
 
                 return Response(
-                    {"message": "Payment successful", "payment": payment.id}
+                    {"message": "Payment successful", "payment_id": payment.id}
                 )
 
             return Response(
