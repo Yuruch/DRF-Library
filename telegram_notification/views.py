@@ -3,6 +3,7 @@ import hashlib
 
 from django.contrib.auth import get_user_model
 from rest_framework import views, status
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from telegram_notification.telegram_bot import TelegramBot
 from dotenv import load_dotenv
@@ -14,6 +15,8 @@ SECRET_PHRASE = os.environ["SECRET_PHRASE"]
 
 
 class ConnectTelegramView(views.APIView):
+    permission_classes = (AllowAny,)
+
     def post(self, request, *args, **kwargs):
         if not request.data.get("message").get("text").startswith("/start"):
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -54,6 +57,8 @@ class ConnectTelegramView(views.APIView):
 
 
 class ObtainTelegramConnectionURL(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request, *args, **kwargs):
         user_id = request.user.id
 
