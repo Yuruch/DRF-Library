@@ -1,4 +1,9 @@
 import stripe
+from drf_spectacular.utils import (
+    extend_schema,
+    OpenApiParameter,
+    OpenApiResponse,
+)
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -21,6 +26,30 @@ class PaymentListView(generics.ListAPIView):
                 borrowing__in=user.borrowing_set.all()
             )
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="search",
+                description="Search term for filtering payments by book title",
+                required=False,
+                type=str,
+            ),
+            OpenApiParameter(
+                name="ordering",
+                description="Comma-separated list of fields to order by",
+                required=False,
+                type=str,
+            ),
+        ],
+        responses={
+            200: PaymentSerializer(many=True),
+            401: OpenApiResponse(description="Unauthorized"),
+        },
+        description="List all payments, with optional filtering and ordering.",
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
 
 class PaymentDetailView(generics.RetrieveAPIView):
     queryset = Payment.objects.all()
@@ -35,7 +64,46 @@ class PaymentDetailView(generics.RetrieveAPIView):
                 borrowing__in=user.borrowing_set.all()
             )
 
+    @extend_schema(
+        responses={
+            200: PaymentSerializer,
+            401: OpenApiResponse(description="Unauthorized"),
+            404: OpenApiResponse(description="Payment not found"),
+        },
+        description="Retrieve details of a specific payment.",
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="session_id",
+            description="Stripe session ID to check payment status",
+            required=True,
+            type=str,
+        ),
+    ],
+    responses={
+        200: OpenApiResponse(
+            description="Payment was successful",
+            examples={
+                "application/json": {
+                    "message": "Payment successful",
+                    "payment_id": "uuid",
+                }
+            },
+        ),
+        400: OpenApiResponse(
+            description="Bad request, payment was not successful or session ID not provided",
+        ),
+        404: OpenApiResponse(
+            description="Payment not found",
+        ),
+    },
+    description="Handle Stripe payment success callback and update payment status.",
+)
 @api_view(["GET"])
 def payment_success(request):
     session_id = request.GET.get("session_id")
@@ -70,6 +138,19 @@ def payment_success(request):
     )
 
 
+@extend_schema(
+    responses={
+        202: OpenApiResponse(
+            description="Payment was canceled, user must pay within 24 hours",
+            examples={
+                "application/json": {
+                    "message": "Payment was canceled. You still have to pay within 24h"
+                }
+            },
+        ),
+    },
+    description="Handle payment cancellation.",
+)
 @api_view(["GET"])
 def payment_cancel(request):
     return Response(
