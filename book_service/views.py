@@ -33,7 +33,7 @@ class BookViewSet(viewsets.ModelViewSet):
         if self.action == "upload_image":
             return BookImageSerializer
 
-        return BookSerializer
+        return self.serializer_class
 
     @action(
         methods=["POST"],
@@ -46,11 +46,9 @@ class BookViewSet(viewsets.ModelViewSet):
         book = self.get_object()
         serializer = BookImageSerializer(book, data=request.data, partial=True)
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @extend_schema(
         parameters=[
