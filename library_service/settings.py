@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     "borrowings_service",
     "telegram_notification",
     "django_celery_beat",
-    "telegram_notification",
 ]
 
 MIDDLEWARE = [
@@ -156,8 +155,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "book_service.permissions.IsAdminOrReadOnly",
     ],
-
-
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
