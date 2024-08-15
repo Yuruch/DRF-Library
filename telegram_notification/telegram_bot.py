@@ -35,6 +35,16 @@ class TelegramBot:
         )
         self._send_message(self._chat_id, message)
 
+    def borrow_user_notification(self, borrowing: Borrowing, telegram_id: int):
+        """send notification to user about their borrowing"""
+        message = (
+            f"Borrow date: {borrowing.borrow_date}\n"
+            f"Expected return date: {borrowing.expected_return_date}\n"
+            f"Book: {borrowing.book}\n"
+            f"User: {borrowing.user}"
+        )
+        self._send_message(telegram_id, message)
+
     def multiple_borrow_administration_notification(
         self, borrowing_list: list[Borrowing]
     ):
