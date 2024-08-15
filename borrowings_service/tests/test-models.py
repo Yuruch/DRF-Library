@@ -15,7 +15,6 @@ class BorrowingModelTest(TestCase):
             password='testpassword'
         )
 
-        # Create a book
         self.book = Book.objects.create(
             title='Test Book',
             author='Test Author',
@@ -23,7 +22,6 @@ class BorrowingModelTest(TestCase):
             inventory=10
         )
 
-        # Create a borrowing instance
         self.borrowing = Borrowing.objects.create(
             book=self.book,
             user=self.user,
