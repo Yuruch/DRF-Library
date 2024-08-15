@@ -17,6 +17,7 @@ from payment_service.services.create_payment import create_stripe_session
 
 
 class BorrowingViewSet(viewsets.ModelViewSet):
+    """Manage borrowings for users."""
     FINE_MULTIPLIER = 2
     queryset = Borrowing.objects.all()
     permission_classes = [IsAuthenticated]
@@ -48,6 +49,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         return queryset
 
     def perform_create(self, serializer):
+        """Create a borrowing record."""
         book = serializer.validated_data["book"]
         if book.inventory <= 0:
             raise ValidationError("The selected book is not available.")
@@ -76,6 +78,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         )
 
     def create(self, request, *args, **kwargs):
+        """Override create method to include custom response if needed."""
         response = super().create(request, *args, **kwargs)
         if hasattr(self, "custom_response"):
             return self.custom_response
@@ -83,6 +86,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["post"], url_path="return")
     def return_borrowing(self, request, pk=None):
+        """Handle the return of a borrowed book and calculate any applicable fine."""
         borrowing = self.get_object()
         expected_date = borrowing.expected_return_date
 
