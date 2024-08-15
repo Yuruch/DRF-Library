@@ -1,0 +1,283 @@
+[
+  {
+    "model": "book_service.book",
+    "pk": 1,
+    "fields": {
+      "title": "Python Crash Course",
+      "author": "Eric Matthes",
+      "cover": "HARD",
+      "inventory": 15,
+      "daily_fee": "19.99",
+      "image": "book_cover_for_json/1.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 2,
+    "fields": {
+      "title": "Head-First Python, 2nd edition",
+      "author": "Paul Barry",
+      "cover": "SOFT",
+      "inventory": 11,
+      "daily_fee": "17.60",
+      "image": "book_cover_for_json/2.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 3,
+    "fields": {
+      "title": "Invent Your Own Computer Games with Python",
+      "author": "Al Sweigart",
+      "cover": "HARD",
+      "inventory": 5,
+      "daily_fee": "25.99",
+      "image": "book_cover_for_json/3.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 4,
+    "fields": {
+      "title": "Think Python: How to Think Like a Computer Scientist",
+      "author": "Allen B. Downey",
+      "cover": "HARD",
+      "inventory": 9,
+      "daily_fee": "18.50",
+      "image": "book_cover_for_json/4.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 5,
+    "fields": {
+      "title": "Effective Computation in Physics: Field Guide to Research with Python",
+      "author": "Anthony Scopatz",
+      "cover": "SOFT",
+      "inventory": 16,
+      "daily_fee": "14.33",
+      "image": "book_cover_for_json/5.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 6,
+    "fields": {
+      "title": "Learn Python 3 the Hard Way",
+      "author": "Zed A. Shaw",
+      "cover": "HARD",
+      "inventory": 14,
+      "daily_fee": "15.05",
+      "image": "book_cover_for_json/6.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 7,
+    "fields": {
+      "title": "Python for Kids: A Playful Introduction to Programming",
+      "author": "Jason R. Briggs",
+      "cover": "SOFT",
+      "inventory": 11,
+      "daily_fee": "18.99",
+      "image": "book_cover_for_json/7.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 8,
+    "fields": {
+      "title": "Teach Your Kids to Code: A Parent-Friendly Guide to Python Programming",
+      "author": "Bryson Payne",
+      "cover": "SOFT",
+      "inventory": 3,
+      "daily_fee": "16.55",
+      "image": "book_cover_for_json/8.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 9,
+    "fields": {
+      "title": "Python Tricks: A Buffet of Awesome Python Features",
+      "author": "Dan Bader",
+      "cover": "SOFT",
+      "inventory": 6,
+      "daily_fee": "12.45",
+      "image": "book_cover_for_json/9.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 10,
+    "fields": {
+      "title": "Effective Python: 59 Ways to Write Better Python",
+      "author": "Brett Slatkin",
+      "cover": "HARD",
+      "inventory": 9,
+      "daily_fee": "19.99",
+      "image": "book_cover_for_json/10.jpg"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 11,
+    "fields": {
+      "title": "Python Cookbook",
+      "author": "David Beazley & Brian K. Jones ",
+      "cover": "SOFT",
+      "inventory": 15,
+      "daily_fee": "24.99",
+      "image": "book_cover_for_json/11.jpg"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 3,
+    "fields": {
+        "email": "alice@example.com",
+        "password": "pbkdf2_sha256$870000$qO9Xuysc4iTel5QkdcKx4K$4FcihOJh12uhkwQgdwF0IDPw4LyzphqZCaW+/LpsYek=",
+        "first_name": "Alice",
+        "last_name": "Johnson",
+        "is_active": true,
+        "is_staff": false,
+        "is_superuser": false,
+        "date_joined": "2024-08-13T12:00:00Z",
+        "last_login": "2024-08-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 4,
+    "fields": {
+        "email": "bob@example.com",
+        "password": "pbkdf2_sha256$870000$PED7Dxsu3xW86Kq1WWIXJ5$hsiePM/eXd0+uAw/Nblc9Wd7gclie8ZcsWCs4TRoPgc=",
+        "first_name": "Bob",
+        "last_name": "Smith",
+        "is_active": true,
+        "is_staff": false,
+        "is_superuser": false,
+        "date_joined": "2024-08-13T12:00:00Z",
+        "last_login": "2024-08-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 5,
+    "fields": {
+        "email": "carol@example.com",
+        "password": "pbkdf2_sha256$870000$5o45On1cGHR3fVCgmWcpD5$YihiGrcUsUKOSOP5V+6Pea9W63HpN+LTRKU1PsvNFx0=",
+        "first_name": "Carol",
+        "last_name": "Davis",
+        "is_active": true,
+        "is_staff": false,
+        "is_superuser": false,
+        "date_joined": "2024-08-13T12:00:00Z",
+        "last_login": "2024-08-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 6,
+    "fields": {
+        "email": "dave@example.com",
+        "password": "pbkdf2_sha256$870000$2rVGi9taxvbZyundSxm2JW$sRpwuui4i3ITwnaqWFg8JREQpQLoun9YNDQerUiUl94=",
+        "first_name": "Dave",
+        "last_name": "Wilson",
+        "is_active": true,
+        "is_staff": false,
+        "is_superuser": false,
+        "date_joined": "2024-08-13T12:00:00Z",
+        "last_login": "2024-08-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 7,
+    "fields": {
+        "email": "eve@example.com",
+        "password": "pbkdf2_sha256$870000$MVzMY5b1YmieEpRb2ZQHEz$y6t1GOgin3wkOZXDxxOOlx50pbfx5iC2TUGxBYvyxc8=",
+        "first_name": "Eve",
+        "last_name": "Taylor",
+        "is_active": true,
+        "is_staff": false,
+        "is_superuser": false,
+        "date_joined": "2024-08-13T12:00:00Z",
+        "last_login": "2024-08-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 1,
+    "fields": {
+      "title": "Python Crash Course",
+      "author": "Eric Matthes",
+      "cover": "HARD",
+      "inventory": 15,
+      "daily_fee": "19.99"
+    }
+  },
+  {
+    "model": "book_service.book",
+    "pk": 2,
+    "fields": {
+      "title": "Head-First Python, 2nd edition",
+      "author": "Paul Barry",
+      "cover": "SOFT",
+      "inventory": 11,
+      "daily_fee": "17.60"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+      "email": "qweqwe@example.com",
+      "password": "pbkdf2_sha256$870000$qO9Xuysc4iTel5QkdcKx4K$4FcihOJh12uhkwQgdwF0IDPw4LyzphqZCaW+/LpsYek=",
+      "first_name": "Alice",
+      "last_name": "Johnson",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "date_joined": "2024-08-13T12:00:00Z",
+      "last_login": "2024-08-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 2,
+    "fields": {
+      "email": "bob@qqqw.com",
+      "password": "pbkdf2_sha256$870000$PED7Dxsu3xW86Kq1WWIXJ5$hsiePM/eXd0+uAw/Nblc9Wd7gclie8ZcsWCs4TRoPgc=",
+      "first_name": "Bob",
+      "last_name": "Smith",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "date_joined": "2024-08-13T12:00:00Z",
+      "last_login": "2024-08-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "borrowings_service.borrowing",
+    "pk": 1,
+    "fields": {
+      "borrow_date": "2024-08-01",
+      "expected_return_date": "2024-08-10",
+      "actual_return_date": null,
+      "book": 1,
+      "user": 1
+    }
+  },
+  {
+    "model": "borrowings_service.borrowing",
+    "pk": 2,
+    "fields": {
+      "borrow_date": "2024-08-02",
+      "expected_return_date": "2024-08-12",
+      "actual_return_date": "2024-08-11",
+      "book": 2,
+      "user": 2
+    }
+  }
+]

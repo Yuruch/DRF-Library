@@ -28,17 +28,19 @@ from drf_spectacular.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/user/", include("user.urls", namespace="user")),
-    path("api/book_service/", include("book_service.urls", namespace="book_service")),
+    path("api/book/", include("book_service.urls", namespace="book_service")),
     path(
-        "api/borrowings_service/",
+        "api/borrowing/",
         include("borrowings_service.urls", namespace="borrowings_service"),
     ),
     path(
         "api/telegram/",
-        include("telegram_notification.urls", namespace="telegram_notification"),
+        include(
+            "telegram_notification.urls", namespace="telegram_notification"
+        ),
     ),
     path(
-        "api/payments/", include("payment_service.urls", namespace="payments")
+        "api/payment/", include("payment_service.urls", namespace="payments")
     ),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
