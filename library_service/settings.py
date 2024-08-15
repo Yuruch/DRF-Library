@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     "user",
+    "payment_service",
     "book_service",
     "borrowings_service",
     "telegram_notification",
@@ -142,12 +143,11 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": (
         "rest_framework.filters.SearchFilter",
         "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.OrderingFilter",
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "book_service.permissions.IsAdminOrReadOnly",
     ],
-
-
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 

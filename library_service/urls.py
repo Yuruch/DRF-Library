@@ -32,6 +32,9 @@ urlpatterns = [
         "api/borrowings_service/",
         include("borrowings_service.urls", namespace="borrowings_service")
     ),
+    path(
+        "api/payments/", include("payment_service.urls", namespace="payments")
+    ),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/doc/swagger/",

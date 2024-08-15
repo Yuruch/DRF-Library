@@ -12,9 +12,12 @@ from borrowings_service.serializers import (
     BorrowingCreateSerializer,
     BorrowingReturnSerializer,
 )
+from payment_service.models import Payment
+from payment_service.services.create_payment import create_stripe_session
 
 
 class BorrowingViewSet(viewsets.ModelViewSet):
+    FINE_MULTIPLIER = 2
     queryset = Borrowing.objects.all()
     permission_classes = [IsAuthenticated]
 
@@ -49,22 +52,59 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         if book.inventory <= 0:
             raise ValidationError("The selected book is not available.")
 
+        if self.request.user.borrowing_set.filter(
+            payments__status=Payment.Status.PENDING
+        ).exists():
+            raise PermissionDenied("You have to pay for all the borrowings!")
+
         book.inventory -= 1
         book.save()
 
-        serializer.save(user=self.request.user)
+        borrowing = serializer.save(user=self.request.user)
+        payment = create_stripe_session(
+            borrowing=borrowing,
+            request=self.request,
+            name="Library Book Borrowing",
+        )
+
+        self.custom_response = Response(
+            {
+                "detail": "You have to pay for using the book",
+                "session_url": payment.session_url,
+            },
+            status=status.HTTP_201_CREATED,
+        )
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        if hasattr(self, "custom_response"):
+            return self.custom_response
+        return response
 
     @action(detail=True, methods=["post"], url_path="return")
     def return_borrowing(self, request, pk=None):
         borrowing = self.get_object()
+        expected_date = borrowing.expected_return_date
 
         if borrowing.user != request.user:
             raise PermissionDenied("You are not allowed to return this book.")
 
-        if borrowing.actual_return_date:
+        if borrowing.actual_return_date and borrowing.payments.filter(
+            type=Payment.Type.FINE, status=Payment.Status.PAID
+        ):
             return Response(
                 {"detail": "This borrowing has already been returned."},
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        elif borrowing.actual_return_date:
+            return Response(
+                {
+                    "detail": "You have returned book but you should pay the fine!",
+                    "session_url": borrowing.payments.get(
+                        type=Payment.Type.FINE
+                    ).session_url,
+                },
+                status=status.HTTP_200_OK,
             )
 
         borrowing.actual_return_date = datetime.now().date()
@@ -74,5 +114,25 @@ class BorrowingViewSet(viewsets.ModelViewSet):
 
         borrowing.book.inventory += 1
         borrowing.book.save()
+        actual_date = borrowing.actual_return_date
 
+        if actual_date > expected_date:
+            fine = (
+                (actual_date - actual_date).days
+                * borrowing.book.daily_fee
+                * self.FINE_MULTIPLIER
+            )
+            payment = create_stripe_session(
+                fine=fine,
+                request=self.request,
+                name="Library Book Borrowing",
+                borrowing=borrowing,
+            )
+            return Response(
+                {
+                    "detail": "You have not return book in time so please pay the fine",
+                    "session_url": payment.session_url,
+                },
+                status=status.HTTP_200_OK,
+            )
         return Response(serializer.data, status=status.HTTP_200_OK)
