@@ -2,12 +2,16 @@ import os
 import hashlib
 
 from django.contrib.auth import get_user_model
-from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiExample
-from rest_framework import views, status
+from drf_spectacular.utils import (
+    extend_schema,
+)
+from rest_framework import views, status, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from telegram_notification.telegram_bot import TelegramBot
 from dotenv import load_dotenv
+
+from telegram_notification.telegram_bot import TelegramBot
+from telegram_notification.serializer import TelegramUrlSerializer
 
 
 load_dotenv()
@@ -59,18 +63,11 @@ class RecieveConfirmationFromTelegram(views.APIView):
             )
 
 
-class ObtainTelegramConnectionURL(views.APIView):
+class ObtainTelegramConnectionURL(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = TelegramUrlSerializer
 
-    @extend_schema(
-        responses={
-            200: OpenApiResponse(
-                description="Url to connect Telegram",
-            )
-        },
-        methods=["GET"],
-    )
-    def get(self, request, *args, **kwargs):
+    def retrieve(self, request, *args, **kwargs):
         """Obtain the personal URL to connect Telegram"""
         user_id = request.user.id
 
