@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+
 from datetime import timedelta
 from pathlib import Path
+
+from telegram_notification.utils import get_ngrok_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +29,12 @@ SECRET_KEY = "django-insecure-!b1w3@xe2m)o!mb&ek(ji-zd@*yt5b4wumy$&!oq&gj*^!u2=9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
+ngrok_url = get_ngrok_url()
+if ngrok_url:
+    host = ngrok_url.split("//")[-1]
+    ALLOWED_HOSTS.append(host)
 
 
 # Application definition

@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
+
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import (
@@ -30,7 +31,11 @@ urlpatterns = [
     path("api/book_service/", include("book_service.urls", namespace="book_service")),
     path(
         "api/borrowings_service/",
-        include("borrowings_service.urls", namespace="borrowings_service")
+        include("borrowings_service.urls", namespace="borrowings_service"),
+    ),
+    path(
+        "api/telegram/",
+        include("telegram_notification.urls", namespace="telegram_notification"),
     ),
     path(
         "api/payments/", include("payment_service.urls", namespace="payments")
