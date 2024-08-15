@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('book_service', '0002_alter_book_cover'),
+        ("book_service", "0002_alter_book_cover"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='image',
-            field=models.ImageField(null=True, upload_to=book_service.models.book_image_file_path),
+            model_name="book",
+            name="image",
+            field=models.ImageField(
+                null=True, upload_to=book_service.models.book_image_file_path
+            ),
         ),
     ]

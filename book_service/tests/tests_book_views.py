@@ -53,7 +53,7 @@ class BookViewSetTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Adjust based on the actual response structure
-        data = response.data.get('results', [])  # Adjust 'results' if needed
+        data = response.data.get("results", [])  # Adjust 'results' if needed
 
         self.assertEqual(len(data), 3)
         self.assertEqual(data[0]["author"], "David Beazley & Brian K. Jones")

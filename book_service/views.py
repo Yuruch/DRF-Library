@@ -10,12 +10,13 @@ from book_service.serializers import (
     BookSerializer,
     BookImageSerializer,
     BookListSerializer,
-    BookDetailSerializer
+    BookDetailSerializer,
 )
 
 
 class BookViewSet(viewsets.ModelViewSet):
     """Endpoints of the books in library with basic CRUD operations"""
+
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAdminOrReadOnly]
@@ -38,7 +39,7 @@ class BookViewSet(viewsets.ModelViewSet):
         methods=["POST"],
         detail=True,
         url_path="upload-image",
-        permission_classes=[IsAdminUser]
+        permission_classes=[IsAdminUser],
     )
     def upload_image(self, request, pk=None):
         """Endpoint for uploading image to a specific book"""

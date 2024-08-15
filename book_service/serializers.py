@@ -19,33 +19,20 @@ class BookSerializer(serializers.ModelSerializer):
 class BookListSerializer(BookSerializer):
     class Meta:
         model = Book
-        fields = (
-            "id",
-            "title",
-            "author",
-            "cover",
-            "inventory",
-            "daily_fee",
-            "image"
-        )
+        fields = ("id", "title", "author", "cover", "inventory", "daily_fee", "image")
 
 
 class BookDetailSerializer(BookSerializer):
 
     class Meta:
         model = Book
-        fields = (
-            "id",
-            "title",
-            "author",
-            "cover",
-            "inventory",
-            "daily_fee",
-            "image"
-        )
+        fields = ("id", "title", "author", "cover", "inventory", "daily_fee", "image")
 
 
 class BookImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ("id", "image",)
+        fields = (
+            "id",
+            "image",
+        )
