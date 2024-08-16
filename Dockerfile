@@ -20,6 +20,8 @@ RUN adduser \
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
+chown appuser venv
+
 USER appuser
 
 COPY . .
