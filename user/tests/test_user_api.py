@@ -37,15 +37,6 @@ class UserTests(APITestCase):
         self.user = USER.objects.create_user(**self.user_data)
         self.client.force_authenticate(user=self.user)
 
-    def test_user_login(self):
-        response = self.client.post(self.token_url, {
-            "email": self.user_data["email"],
-            "password": self.user_data["password"]
-        }, format="json")
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn('access', response.data)
-        self.assertIn('refresh', response.data)
-
     def test_manage_user(self):
         response = self.client.get(self.manage_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -60,3 +51,25 @@ class UserTests(APITestCase):
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, "Updated")
         self.assertTrue(self.user.check_password("newpassword123"))
+
+class UserLoginTests(APITestCase):
+    def setUp(self):
+        self.token_url = reverse("user:token_obtain_pair")
+        self.user_data = {
+            "email": "testuser@example.com",
+            "password": "testpassword123",
+            "first_name": "Test",
+            "last_name": "User"
+        }
+        self.user = USER.objects.create_user(**self.user_data)
+
+    def test_user_login_successful(self):
+        response = self.client.post(self.token_url, {
+            "email": self.user_data["email"],
+            "password": self.user_data["password"]
+        }, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+        self.assertIn("refresh", response.data)
+        self.assertTrue(response.data["access"])
+        self.assertTrue(response.data["refresh"])
