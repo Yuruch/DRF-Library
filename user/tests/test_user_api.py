@@ -15,12 +15,17 @@ class RegistrationTests(APITestCase):
             "email": "newuser@example.com",
             "password": "newpassword123",
             "first_name": "New",
-            "last_name": "User"
+            "last_name": "User",
         }
-        response = self.client.post(self.register_url, new_user_data, format="json")
+        response = self.client.post(
+            self.register_url, new_user_data, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(USER.objects.count(), 1)
-        self.assertEqual(USER.objects.get(email=new_user_data["email"]).email, new_user_data["email"])
+        self.assertEqual(
+            USER.objects.get(email=new_user_data["email"]).email,
+            new_user_data["email"],
+        )
 
 
 class UserTests(APITestCase):
@@ -32,7 +37,7 @@ class UserTests(APITestCase):
             "email": "testuser@example.com",
             "password": "testpassword123",
             "first_name": "Test",
-            "last_name": "User"
+            "last_name": "User",
         }
         self.user = USER.objects.create_user(**self.user_data)
         self.client.force_authenticate(user=self.user)
@@ -44,16 +49,18 @@ class UserTests(APITestCase):
 
     def test_update_user(self):
         old_password_hash = self.user.password
-        response = self.client.patch(self.manage_url, {
-            "first_name": "Updated",
-            "password": "newpassword123"
-        }, format="json")
+        response = self.client.patch(
+            self.manage_url,
+            {"first_name": "Updated", "password": "newpassword123"},
+            format="json",
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, "Updated")
         self.assertTrue(self.user.check_password("newpassword123"))
         self.assertNotEqual(self.user.password, old_password_hash)
         self.assertTrue(self.user.password.startswith("pbkdf2_sha256$"))
+
 
 class UserLoginTests(APITestCase):
     def setUp(self):
@@ -62,15 +69,19 @@ class UserLoginTests(APITestCase):
             "email": "testuser@example.com",
             "password": "testpassword123",
             "first_name": "Test",
-            "last_name": "User"
+            "last_name": "User",
         }
         self.user = USER.objects.create_user(**self.user_data)
 
     def test_user_login_successful(self):
-        response = self.client.post(self.token_url, {
-            "email": self.user_data["email"],
-            "password": self.user_data["password"]
-        }, format="json")
+        response = self.client.post(
+            self.token_url,
+            {
+                "email": self.user_data["email"],
+                "password": self.user_data["password"],
+            },
+            format="json",
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("access", response.data)
         self.assertIn("refresh", response.data)

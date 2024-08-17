@@ -15,7 +15,7 @@ urlpatterns = [
     path("token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path("me/", ManageUserView.as_view(), name="manage"),
     path(
-        "me/connect_telegram",
+        "me/connect_telegram/",
         ObtainTelegramConnectionURL.as_view(),
         name="connect_telegram",
     ),
