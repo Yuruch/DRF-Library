@@ -1,13 +1,23 @@
 from django.contrib.auth import get_user_model, authenticate
-from rest_framework import serializers
 from django.utils.translation import gettext as _
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ("id", "email", "first_name", "last_name", "password", "is_staff")
-        read_only_fields = ("id", "is_staff",)
+        fields = (
+            "id",
+            "email",
+            "first_name",
+            "last_name",
+            "password",
+            "is_staff",
+        )
+        read_only_fields = (
+            "id",
+            "is_staff",
+        )
         extra_kwargs = {
             "password": {
                 "write_only": True,
@@ -23,7 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data["email"],
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
-            password=validated_data["password"]
+            password=validated_data["password"],
         )
 
     def update(self, instance, validated_data):
@@ -54,7 +64,9 @@ class AuthTokenSerializer(serializers.Serializer):
 
         if email and password:
             user = authenticate(
-                request=self.context.get("request"), email=email, password=password
+                request=self.context.get("request"),
+                email=email,
+                password=password,
             )
 
             if user:

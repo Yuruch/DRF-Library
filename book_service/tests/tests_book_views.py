@@ -1,5 +1,5 @@
-from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
@@ -48,7 +48,9 @@ class BookViewSetTests(TestCase):
 
     def test_filter_books_by_author(self):
         url = reverse("book_service:book-list")
-        response = self.client.get(url, {"author": "David Beazley & Brian K. Jones"})
+        response = self.client.get(
+            url, {"author": "David Beazley & Brian K. Jones"}
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.data.get("results", [])
         self.assertEqual(len(data), 3)
