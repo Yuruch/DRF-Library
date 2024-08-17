@@ -4,6 +4,7 @@ from telegram_notification.views import (
     RecieveConfirmationFromTelegram,
 )
 
+
 urlpatterns = [
     path(
         "reviece_telegram_messages/",

@@ -1,10 +1,11 @@
-from django.test import TestCase
 from unittest.mock import patch, MagicMock
 
-from user.models import User
+from django.test import TestCase
+
 from book_service.models import Book
 from borrowings_service.models import Borrowing
 from telegram_notification.telegram_bot import TelegramBot
+from user.models import User
 
 
 class TelegramBotTestCase(TestCase):

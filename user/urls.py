@@ -5,8 +5,9 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
-from user.views import CreateUserView, ManageUserView
 from telegram_notification.views import ObtainTelegramConnectionURL
+from user.views import CreateUserView, ManageUserView
+
 
 urlpatterns = [
     path("register/", CreateUserView.as_view(), name="create"),

@@ -1,17 +1,17 @@
-import os
 import hashlib
+import os
 
 from django.contrib.auth import get_user_model
+from dotenv import load_dotenv
 from drf_spectacular.utils import (
     extend_schema,
 )
 from rest_framework import views, status, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from dotenv import load_dotenv
 
-from telegram_notification.telegram_bot import TelegramBot
 from telegram_notification.serializer import TelegramUrlSerializer
+from telegram_notification.telegram_bot import TelegramBot
 
 
 load_dotenv()
