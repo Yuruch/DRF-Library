@@ -43,6 +43,7 @@ class UserTests(APITestCase):
         self.assertEqual(response.data["email"], self.user_data["email"])
 
     def test_update_user(self):
+        old_password_hash = self.user.password
         response = self.client.patch(self.manage_url, {
             "first_name": "Updated",
             "password": "newpassword123"
@@ -51,6 +52,8 @@ class UserTests(APITestCase):
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, "Updated")
         self.assertTrue(self.user.check_password("newpassword123"))
+        self.assertNotEqual(self.user.password, old_password_hash)
+        self.assertTrue(self.user.password.startswith("pbkdf2_sha256$"))
 
 class UserLoginTests(APITestCase):
     def setUp(self):
