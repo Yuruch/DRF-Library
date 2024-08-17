@@ -41,10 +41,13 @@ class RecieveConfirmationFromTelegram(views.APIView):
 
         if (
             signature
-            != hashlib.sha256(f"{user_id}{SECRET_PHRASE}".encode()).hexdigest()[16:]
+            != hashlib.sha256(
+                f"{user_id}{SECRET_PHRASE}".encode()
+            ).hexdigest()[16:]
         ):
             return Response(
-                {"error": f"Invalid signature"}, status=status.HTTP_400_BAD_REQUEST
+                {"error": f"Invalid signature"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         user_id = int(user_id)
@@ -71,8 +74,8 @@ class ObtainTelegramConnectionURL(generics.RetrieveAPIView):
         """Obtain the personal URL to connect Telegram"""
         user_id = request.user.id
 
-        signature = hashlib.sha256(f"{user_id}{SECRET_PHRASE}".encode()).hexdigest()[
-            16:
-        ]
+        signature = hashlib.sha256(
+            f"{user_id}{SECRET_PHRASE}".encode()
+        ).hexdigest()[16:]
         connect_url = f"{os.environ['BOT_URL']}?start={user_id}_{signature}"
         return Response({"url": connect_url}, status=status.HTTP_200_OK)

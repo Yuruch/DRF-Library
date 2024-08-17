@@ -9,7 +9,6 @@ from user.models import User
 
 
 class TelegramBotTestCase(TestCase):
-
     @patch("telegram_notification.telegram_bot.requests.post")
     @patch("telegram_notification.telegram_bot.logging.warning")
     def test_borrow_administration_notification(
