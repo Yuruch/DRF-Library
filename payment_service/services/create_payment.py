@@ -16,7 +16,7 @@ stripe.api_key = os.getenv("STRIPE_TEST_API_KEY")
 def create_stripe_session(
     request: HttpRequest,
     name: str,
-    borrowing: Borrowing = None,
+    borrowing: Borrowing,
     fine: int = None,
 ) -> Payment:
     if fine:
