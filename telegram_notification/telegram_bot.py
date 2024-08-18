@@ -1,8 +1,9 @@
-import os
 import logging
+import os
 
-from dotenv import load_dotenv
 import requests
+from dotenv import load_dotenv
+
 from borrowings_service.models import Borrowing
 
 
@@ -51,7 +52,9 @@ class TelegramBot:
         for borrowing in borrowing_list:
             self.borrow_administration_notification(borrowing)
 
-    def successful_payment_administration_notification(self, payment: "Payment"):
+    def successful_payment_administration_notification(
+        self, payment: "Payment"
+    ):
         """send notification to administration about succesful payment"""
         message = (
             f"User: {payment.borrowing.user}\n"

@@ -18,6 +18,7 @@ from payment_service.services.create_payment import create_stripe_session
 
 class BorrowingViewSet(viewsets.ModelViewSet):
     """Manage borrowings for users."""
+
     FINE_MULTIPLIER = 2
     queryset = Borrowing.objects.all()
     permission_classes = [IsAuthenticated]
@@ -100,10 +101,16 @@ class BorrowingViewSet(viewsets.ModelViewSet):
                 {"detail": "This borrowing has already been returned."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        elif borrowing.actual_return_date:
+        elif (
+            borrowing.actual_return_date
+            and borrowing.user.payments.filter(
+                status=Payment.Status.PENDING
+            ).exists()
+        ):
             return Response(
                 {
-                    "detail": "You have returned book but you should pay the fine!",
+                    "detail": "You have returned book but you "
+                    "should pay all the pending payments!",
                     "session_url": borrowing.payments.get(
                         type=Payment.Type.FINE
                     ).session_url,

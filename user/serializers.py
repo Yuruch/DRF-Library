@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "password",
-            "is_staff"
+            "is_staff",
         )
         read_only_fields = (
             "id",
@@ -40,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data["email"],
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
-            password=validated_data["password"]
+            password=validated_data["password"],
         )
 
     def update(self, instance, validated_data):
@@ -82,7 +82,7 @@ class AuthTokenSerializer(serializers.Serializer):
             user = authenticate(
                 request=self.context.get("request"),
                 email=email,
-                password=password
+                password=password,
             )
 
             if user:
