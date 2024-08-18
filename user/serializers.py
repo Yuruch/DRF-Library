@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model, authenticate
-from django.utils.translation import gettext as _
 from rest_framework import serializers
+from django.utils.translation import gettext_lazy as _
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,7 +28,14 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        """Create a new user with encrypted password and return it"""
+        """
+        Create a new user with encrypted password and return it.
+        Args:
+            validated_data (dict): A dictionary containing the validated user data.
+            It must include 'email', 'first_name', 'last_name', and 'password'.
+        Returns:
+            User: The created user instance with encrypted password.
+        """
         return get_user_model().objects.create_user(
             email=validated_data["email"],
             first_name=validated_data["first_name"],
@@ -37,7 +44,16 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
     def update(self, instance, validated_data):
-        """Update a user, set the password correctly and return it"""
+        """
+        Update a user, set the password correctly and return it.
+        Args:
+            instance (User): The user instance to update.
+            validated_data (dict): A dictionary containing the validated user data.
+            It may include 'first_name', 'last_name', and optionally 'password'.
+        Returns:
+            User: The updated user instance with the new data and
+            hashed password (if provided).
+        """
         password = validated_data.pop("password", None)
         user = super().update(instance, validated_data)
         if password:

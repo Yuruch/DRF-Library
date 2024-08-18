@@ -3,11 +3,15 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    """Define a model manager for User model with no username field."""
+    """
+    Custom manager for the User model without a username field.
+    This manager provides methods to create regular users and superusers
+    with email-based authentication.
+    """
 
     use_in_migrations = True
 
@@ -41,6 +45,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    """
+    Custom user model with email-based authentication and no username field.
+    """
+
     username = None
     email = models.EmailField(_("email address"), unique=True)
     telegram_id = models.IntegerField(null=True, blank=True)
